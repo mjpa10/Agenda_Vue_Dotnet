@@ -68,11 +68,13 @@ Clone o repositório para sua máquina local:
 
 ```bash
 git clone https://github.com/mjpa10/Agenda_Vue_Dotnet.git
+```
 
 ### 2. abrir pasta do projeto
 
 ```bash
 cd Agenda_Vue_Dotnet
+```
 
 ### 3. Rodar os Contêineres com Docker Compose
 
@@ -80,6 +82,7 @@ Na pasta do repositório clonado, utilize o Docker Compose para rodar os serviç
 
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+```
 
 ## Como Usar
 
