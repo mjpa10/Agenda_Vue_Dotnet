@@ -1,0 +1,19 @@
+FROM node:lts-alpine
+
+# faz da pasta 'app' o diretório atual de trabalho
+WORKDIR /app
+
+# copia os arquivos 'package.json' e 'package-lock.json' (se disponível)
+COPY package*.json ./
+
+# instala dependências do projeto
+RUN npm install
+
+# copia os arquivos da aplicação para o diretório de trabalho
+COPY . .
+
+# expõe a porta 8080 (padrão do Vue.js em modo de desenvolvimento)
+EXPOSE 8080
+
+# comando para rodar o servidor de desenvolvimento (com hot-reload)
+CMD ["npm", "run", "serve"]

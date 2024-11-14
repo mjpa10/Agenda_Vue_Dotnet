@@ -1,0 +1,52 @@
+services:
+  vue-app:
+    container_name: vue.js
+    build:
+      context: ./Vue.js_Agenda  # Caminho para a pasta do frontend Vue.js
+      dockerfile: Dockerfile   # Certifique-se de que esse Dockerfile esteja na pasta Vuejs_Agenda
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./Vue.js_Agenda:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - api_agenda
+
+  api_agenda:
+    container_name: aspnet
+    build:
+      context: ./.Net_Agenda  # Caminho para a pasta do backend .NET
+      dockerfile: API_Agenda/Dockerfile  # Ajuste se o Dockerfile tiver outro caminho dentro de Net_Agenda
+    depends_on:
+      - database
+    ports:
+      - "5000:8080"
+    restart: always
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - DBHOST=database
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  database:
+    image: mysql:8.0.22
+    container_name: mysqldb
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-volume:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: agendadb
+
+volumes:
+  db-volume:
+    name: mysql_volume
+
+networks:
+  default:
+    name: Aplicacao_vue_CSharp
