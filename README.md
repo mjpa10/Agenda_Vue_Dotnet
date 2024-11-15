@@ -9,7 +9,7 @@ A arquitetura foi projetada para ser modular, permitindo que você execute e des
 
 **Projetos Incluídos**:
 - **Frontend**: [Vue.js_Agenda](https://github.com/mjpa10/Vue.js_Agenda) – Um projeto Vue.js que fornece a interface interativa para gerenciamento de contatos.
-- **Backend**: [API_Agenda](https://github.com/mjpa10/.Net_Agenda) – Uma API em .NET que lida com o processamento e armazenamento dos dados de contatos em um banco de dados, garantindo a integridade dos dados e evitando duplicidade.
+- **Backend**: [.Net_Agenda](https://github.com/mjpa10/.Net_Agenda) – Uma API em .NET que lida com o processamento e armazenamento dos dados de contatos em um banco de dados, garantindo a integridade dos dados e evitando duplicidade.
 
 ---
 
@@ -19,7 +19,7 @@ A arquitetura foi projetada para ser modular, permitindo que você execute e des
 - [Pré-requisitos](#pré-requisitos)
 - [Como Instalar](#como-instalar)
 - [Como Usar](#como-usar)
-- [Estrutura de Diretórios](#estrutura-de-diretórios)
+- [Possíveis Erros](#possíveis-erros)
 
 ---
 
@@ -104,5 +104,36 @@ Esses são os endpoints principais para interação com o sistema de **agenda de
 - O banco de dados é gerido pelo MySQL e está disponível dentro do contêiner, com a configuração fornecida no `docker-compose.yml`.
 - Não é necessário interação direta com o banco de dados para utilizar a aplicação, mas ele está disponível para consulta ou manutenção, caso necessário.
 
+ ### Em Execução
+  ![image](https://github.com/user-attachments/assets/96bf7913-277b-4aa1-b9df-50fb81ba1ea6)
+
+ - Aqui podemos ver que o contêiner já está em execução.
+
+  ![image](https://github.com/user-attachments/assets/eac314b5-47d2-4291-8daf-11a4ba9ec9ae)
+
+ - Em aproximadamente 3 a 5 minutos, a conexão será estabelecida e as migrações serão aplicadas ao banco de dados. Depois disso, você estará pronto para aproveitar a aplicação!
+
 ---
+
+## Possíveis Erros
+
+### Erro: Porta do Banco de Dados em Uso
+
+Caso este erro apareça (veja a imagem abaixo), é porque a porta destinada ao banco de dados da aplicação já está em uso:
+
+![image](https://github.com/user-attachments/assets/b0c58ad2-57a9-428b-864a-86fb42cb1655)
+
+Para resolver:
+
+![image](https://github.com/user-attachments/assets/bfe1e7d7-ed91-4d61-8bdb-f6305592f11d)
+
+
+1. Abra o **Gerenciador de Tarefas** e localize o processo do **MySQL**.
+2. Finalize o processo para liberar a porta ocupada.
+3. Após isso, execute o comando abaixo para iniciar os contêineres novamente:
+
+   ```bash
+   docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+   ```
+
 
